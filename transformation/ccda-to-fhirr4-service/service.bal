@@ -69,4 +69,10 @@ service / on new http:Listener(9090) {
         log:printError("Error occurred in CCDA to FHIR transformation.", ccdaToFhir);
         return <CcdaToFhirInternalServerError> {body: r4:errorToOperationOutcome(ccdaToFhir)};
     }
+
+    # Service status endpoint
+    # + return - Status message indicating the service is running.
+    resource function get status(http:RequestContext ctx) returns http:Ok {
+        return {body: "CCDA to FHIR transformation service is running."};
+    }
 }
